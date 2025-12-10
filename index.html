@@ -51,11 +51,11 @@
 <script>
 
 // ============================================================
-//  ACRONYM ENGINE OF THE REPUBLIC (FINAL MAX EDITION)
+//  ACRONYM ENGINE OF THE REPUBLIC 
 // ============================================================
 
 
-// ---------- SEED LIST (multiple blocks) -------------
+// ---------- SEED LIST -------------
 
 const seedBlocks = [
 ["UTKARSH","PRAGATI","TEJAS","SAKSHAM","SAMPANN","GARIMA","LAKSHYA","PRERNA","NIRMAL","DHRUV","UJALA","TARANG"],
@@ -74,7 +74,7 @@ let seeds = [];
 seedBlocks.forEach(b => seeds.push(...b));
 
 
-// ---------- RANDOMIZER (No repeats) -------------
+// ---------- RANDOMIZER  -------------
 
 function createDeck(list) {
   const deck = [...list];
@@ -113,9 +113,6 @@ const goals = [
 ];
 
 
-// -------------------------------------------------------------
-// ⭐ THE FIXED TEMPLATES — ACRONYM IS ALWAYS BOLD NOW
-// -------------------------------------------------------------
 
 const templates = [
 (seed,v,c,g,e)=>`<div class="acronym">${seed}</div>${v} ${c}<br><em>${g}</em><hr>${e}`,
@@ -127,7 +124,6 @@ const templates = [
 ];
 
 
-// ---------- LETTER EXPANSION ENGINE -------------
 
 const dict = {
 A:"Action",B:"Bharat",C:"Collaboration",D:"Development",E:"Empowerment",F:"Framework",
@@ -142,7 +138,7 @@ function expand(seed) {
 }
 
 
-// ---------- GENERATOR CORE -------------
+// ---------- GENERATOR  -------------
 
 function pick(arr) { return arr[Math.floor(Math.random()*arr.length)]; }
 
@@ -157,7 +153,7 @@ function generateOne() {
 }
 
 
-// ---------- UI ACTIONS -------------
+// ---------- UI  -------------
 
 function generate() {
   document.getElementById("output").innerHTML = generateOne();
