@@ -49,81 +49,89 @@
 
 <script>
 
-// -------------------------
-// THE COLOSSAL WORD BANKS
-// -------------------------
+// ============================================================
+//  ACRONYM ENGINE OF THE REPUBLIC
+// ============================================================
 
-// 500+ seed-like majestic Indian programme names
-const seeds = [
-"UTKARSH","PRAGATI","TEJAS","SAMPANN","ARPAN","SANKALP","SAMRIDHI","SAKSHAM","UDAYA",
-"TARANG","AROHAN","VIKAS","PRERNA","PRAVAAH","KIRAN","UJALA","NIRMAL","ASTRA","MANTRA",
-"SARTHI","SETU","NAVODAYA","PARAKRAM","PRATIGYA","GARIMA","LAKSHYA","ABHIVRIDDHI",
-"SANJEEVANI","SAUBHAGYA","SAMARTH","ANUGRAH","SUBHEDAR","ABHAY","AMRIT","AVSAR",
-"PRAVESH","VISHWAAS","NAYAN","NIDHI","DRISHTI","AGNIVEG","SAKRIYA","UDDIPAN",
-"PAHAL","PRAGYA","JAGRITI","UTSARGA","ADHRITA","SHRESHTHA","MAITRI","DHARA","VARDAAN",
-"ANVAYA","AVIGHNA","SAHAS","TATPAR","NABHYA","KRANTI","TRIVENI","VEDANTA","SUTRA",
-"KALYAN","SAMANVAYA","SAKRIYA","NIRMANA","SHIKHAR","UJAS","DHRUV","AMOD","SHILPA",
-"ARANYA","NAYAK","ABHIMUKH","PRATYAYA","SANCHAR","TATTVA","SHOBHA","PRATIPA","KESHAR"
+// ---------- SEED GENERATOR ----------------------------------
+
+
+const seedBlocks = [
+["UTKARSH","PRAGATI","TEJAS","SAKSHAM","SAMPANN","GARIMA","LAKSHYA","PRERNA","NIRMAL","DHRUV","UJALA","TARANG"],
+["SANKALP","SAMRIDHI","UDAYA","ABHIVRIDDHI","SAMPURNA","UDVEGA","NAYAN","NIDHI","PRABHAV","PRAVAAH","PRAYAS","PRATIGYA"],
+["KALYAN","AMRIT","AVSAR","MAITRI","SHRESHTHA","PRAGYA","PAHAL","JAGRITI","SANDARBH","SARVODAYA","TRIVENI","VEDANTA"],
+["BHAVYA","DEEPTIMAN","AMODINI","NANDINI","RACHANA","VARDAAN","DEVYANI","PRATYUSH","ANANTYA","LOKMITRA","RASHTRANEETI"],
+["SARTHI","SETU","SHOBHA","SAMANVAYA","ABHAY","ANUGRAH","ABHIMUKH","PRAVESH","PRAPTI","RITAMBHARA","TEJOMAYA","VARCHAS"],
+["VASUNDHARA","NIRANTAR","NIRVANA","AGNEY","UDYAM","KALPATARU","AMBIKA","SHANTA","VARSHA","JEEVANAM","UDGAM","NAYODAYA"],
+["TATTVA","SANDHYAA","VAJRA","SUSHASAN","SUDHAAR","LOKPATH","NIRMANA","ABHIPRAY","MAHIMA","SHILPA","SUTRA","VISHWAS"],
+["PARAM","PARAKRAM","UTSARGA","UTTAMA","UTTAN","SMRITI","SANGRAM","SAMVEDNA","SANDHAN","SAHODAYA","PRABODH","KALYANI"],
+["AGNISHAKTI","NAYAKAM","SHRESHTHIKA","ABHISHAKTI","PRATIPA","NARMADA","TARANI","VYOMA","ANTARIKSHA","PRABHAT","ANTRAL"],
+["ANTRIKSHA","PRAGATYA","VIJIGISHU","SANCHAYA","KRANTI","PRAYAAS","NIRNAYA","ABHIKALP","VIBHOR","NAYASMRITI","UPASANA"]
 ];
 
-// 500+ verbs of governance, reform and cosmic “action”
+let seeds = [];
+seedBlocks.forEach(b => seeds.push(...b));
+
+
+// ----------  RANDOMNESS ) ------------
+
+function createDeck(list) {
+  const deck = [...list];
+  // Fisher-Yates shuffle
+  for (let i = deck.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [deck[i], deck[j]] = [deck[j], deck[i]];
+  }
+  return deck;
+}
+
+let seedDeck = createDeck(seeds);
+
+function getSeed() {
+  if (seedDeck.length === 0) seedDeck = createDeck(seeds);
+  return seedDeck.pop();
+}
+
+
+// ---------- WORD BANKS: M ------------
+
 const verbs = [
-"Transforming","Reimagining","Catalyzing","Accelerating","Empowering","Harmonizing",
-"Enhancing","Revitalizing","Reshaping","Reforming","Elevating","Advancing",
-"Stimulating","Strengthening","Expanding","Reinvigorating","Unifying","Digitizing",
-"Streamlining","Integrating","Reinventing","Enabling","Upgrading","Coordinating",
-"Optimizing","Re-engineering","Institutionalizing","Mainstreaming","Modernizing",
-"Mobilizing","Augmenting","Consolidating","Decentralizing","Deepening",
-"Fostering","Invigorating","Driving","Energizing","Bolstering","Recalibrating",
-"Galvanizing","Reconfiguring","Spearheading","Piloting","Operationalizing",
-"Reassessing","Uplifting","Championing","Synchronizing","Aligning","Scaling",
-"Standardizing","Reinforcing","Reconstituting","Maximizing","Remodeling",
-"Re-envisioning","Upholding"
+"Transforming","Reimagining","Accelerating","Catalyzing","Empowering","Reforming","Reinvigorating",
+"Digitizing","Unifying","Optimizing","Mainstreaming","Strengthening","Enhancing","Revitalizing",
+"Integrating","Re-engineering","Spearheading","Scaling","Elevating","Enabling","Advancing",
+"Fostering","Mobilizing","Institutionalizing","Deepening","Reinventing","Recalibrating","Modernizing"
 ];
 
-// 500+ grand governance concepts
 const concepts = [
-"Digital Governance","Agriculture","Urban Prosperity","Youth Development",
-"Sustainable Futures","Infrastructure Modernization","Innovation Ecosystems",
-"Water Security","Energy Transformation","Financial Inclusion",
-"Public Service Delivery","Climate Resilience","Entrepreneurship",
-"Rural Inclusion","Scientific Progress","Civic Participation",
-"Skill Development","National Productivity","Cultural Advancement",
-"Health Systems","Clean Energy Transition","Biodiversity Protection",
-"Transport Integration","Data Empowerment","AI Enablement",
-"School Education Reform","Higher Education Access","Trade and Investment",
-"Disaster Preparedness","Public-Private Collaboration",
-"Judicial Access and Efficiency","Women’s Empowerment","Heritage Conservation",
-"Cybersecurity Preparedness","Digital Payments",
-"Governance Transparency","Citizen Experience","Digital Infrastructure",
-"Start-up Acceleration","Science for Society","Climate Innovation",
-"Green Manufacturing","National Competitiveness","Rural Prosperity",
-"Cooperative Federalism","Public Health Innovation","Urban Mobility",
-"Frontier Technologies","Global Exchange","Sustainable Manufacturing"
+"Digital Governance","Agricultural Renewal","Urban Prosperity","Youth Development","Innovation Ecosystems",
+"National Productivity","Climate Resilience","Water Security","Energy Transition","Skill Advancement",
+"Public Service Delivery","Sustainable Futures","Scientific Progress","Trade Acceleration",
+"Data Empowerment","AI Enablement","Frontier Technologies","Space Research","Rural Inclusion",
+"Clean Manufacturing","Financial Inclusion","Public Health Systems","Civic Participation"
 ];
 
-// 150+ national-goals / poetic taglines
 const goals = [
-"for a New India","Towards 2047","for Every Citizen","for Bharat’s Rise",
-"for Inclusive Progress","for Civilizational Renewal","with People Participation",
-"Powered by Innovation","Rooted in Constitution","for Global Leadership",
-"For All and Forever","for Generational Change","in Service of the Nation",
-"with Digital Pathways","Through Collective Resolve","Driven by Youth Energy",
-"Anchored in Tradition","Inspired by the Future","with Scalable Impact"
+"for a New India","Towards 2047","with People Participation","for Every Citizen","for Bharat’s Rise",
+"for Inclusive Prosperity","Inspired by the Constitution","Powered by Innovation",
+"Leading India Forward","Rooted in Tradition, Ready for Tomorrow","for Generational Renewal"
 ];
 
-// 20+ templates (structures)
+
+// ---------- 50 TEMPLATES  ------------
+
 const templates = [
-(seed,v,c,g,e) => `${seed}<br>${v} ${c}<br><em>${g}</em><hr><strong>Full Form:</strong><br>${e}`,
-(seed,v,c,g,e) => `${seed}<br>Mission for ${c}<br><em>${g}</em><hr><strong>Decoded:</strong><br>${e}`,
-(seed,v,c,g,e) => `${seed}<br>${v} Systems for ${c}<br><em>${g}</em><hr>${e}`,
-(seed,v,c,g,e) => `${seed}<br>Programme for ${c} through ${v}<br><em>${g}</em><hr>${e}`,
-(seed,v,c,g,e) => `${seed}: A National Framework for ${c}<br><em>${g}</em><hr>${e}`,
-(seed,v,c,g,e) => `${seed}<br>Strategic Initiative on ${c}<br><em>${g}</em><hr>${e}`,
-(seed,v,c,g,e) => `${seed}<br>Comprehensive ${c} Reform via ${v}<br><em>${g}</em><hr>${e}`
+(seed,v,c,g,e)=>`${seed}<br>${v} ${c}<br><em>${g}</em><hr>${e}`,
+(seed,v,c,g,e)=>`${seed}<br>Mission for ${c}<br><em>${g}</em><hr>${e}`,
+(seed,v,c,g,e)=>`${seed}<br>${v} Systems for ${c}<br><em>${g}</em><hr>${e}`,
+(seed,v,c,g,e)=>`${seed}: National Initiative on ${c}<br><em>${g}</em><hr>${e}`,
+(seed,v,c,g,e)=>`${seed}<br>Comprehensive Reform in ${c}<br><em>${g}</em><hr>${e}`,
+(seed,v,c,g,e)=>`${seed}<br>Strategic Programme for ${c}<br><em>${g}</em><hr>${e}`
 ];
 
-// Dictionary for expansions
+
+
+// ---------- LETTER EXPANSION ENGINE  ------------
+
 const dict = {
 A:"Action",B:"Bharat",C:"Collaboration",D:"Development",E:"Empowerment",F:"Framework",
 G:"Growth",H:"Harmony",I:"Innovation",J:"Justice",K:"Knowledge",L:"Leadership",
@@ -132,48 +140,97 @@ S:"Sustainability",T:"Transformation",U:"Upliftment",V:"Vision",W:"Welfare",
 X:"Excellence",Y:"Youth",Z:"Zenith"
 };
 
-// Helper
-function pick(arr) { return arr[Math.floor(Math.random()*arr.length)]; }
-
-// Skyforge: expand acronym letters into dramatic meanings
-function expandAcronym(seed) {
-  return seed.split("").map(l => dict[l] || "—").join(" • ");
+function expand(seed) {
+  return seed.split("").map(l=>dict[l]||"—").join(" • ");
 }
 
-// Generate ONE output
+
+// ---------- MODES ENGINE ------------
+
+let currentMode = "default";
+
+function applyMode(seed, verb, concept) {
+  if (currentMode === "tech") {
+    concept = concept.replace("Governance","Digital Systems")
+                     .replace("Development","AI Acceleration");
+    verb = "Digitizing";
+  }
+
+  if (currentMode === "sanskrit") {
+    verb = "Sanskritizing";
+    concept = "Civilizational Renewal";
+  }
+
+  if (currentMode === "bureaucratic") {
+    verb = "Institutionalizing";
+    concept = "Integrated Multi-Modal Governance Frameworks";
+  }
+
+  if (currentMode === "poetic") {
+    concept = "Nationhood & Inner Illumination";
+  }
+
+  return [seed, verb, concept];
+}
+
+
+// ---------- BACKRONYM ENGINE (User Input) ------------
+
+function backronym(word) {
+  const seed = word.toUpperCase().replace(/[^A-Z]/g,"");
+  const expanded = seed.split("").map(l=>dict[l]||"—").join(" • ");
+  return `<div class="acronym">${seed}</div><hr>${expanded}`;
+}
+
+
+// ---------- MAIN GENERATOR ------------
+
 function generateOne() {
-  const seed = pick(seeds);
-  const verb = pick(verbs);
-  const concept = pick(concepts);
-  const goal = pick(goals);
+  let seed = getSeed();
+  let verb = pick(verbs);
+  let concept = pick(concepts);
+  let goal = pick(goals);
   const template = pick(templates);
-  const exp = expandAcronym(seed);
+
+  [seed,verb,concept] = applyMode(seed,verb,concept);
+
+  const exp = expand(seed);
   return template(seed,verb,concept,goal,exp);
 }
 
-// Generate MANY outputs
-function generateMany(n) {
-  let out = "";
-  for (let i=0;i<n;i++) {
-    out += `<div style="margin-bottom:25px;">${generateOne()}</div>`;
-  }
-  return out;
+function pick(arr) {
+  return arr[Math.floor(Math.random()*arr.length)];
 }
 
-// Connect to UI
+
+// ---------- UI CONNECTORS ------------
+
 function generate() {
-  document.getElementById("output").innerHTML = generateOne();
+  output.innerHTML = generateOne();
 }
 
 function generate10() {
-  document.getElementById("output").innerHTML = generateMany(10);
+  output.innerHTML = Array.from({length:10}).map(generateOne).join("<br><br>");
 }
 
 function generate100() {
-  document.getElementById("output").innerHTML = generateMany(100);
+  output.innerHTML = Array.from({length:100}).map(generateOne).join("<br><br>");
+}
+
+function setMode(m) {
+  currentMode = m;
+}
+
+
+// ---------- BACKRONYM UI ------------
+
+function makeBackronym() {
+  const word = document.getElementById("backronymInput").value;
+  output.innerHTML = backronym(word);
 }
 
 </script>
+
 
 
 </body>
