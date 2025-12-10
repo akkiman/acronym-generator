@@ -35,6 +35,7 @@
       font-size: 1.8rem;
       font-weight: bold;
       color: #d00000;
+      margin-bottom: 4px;
     }
   </style>
 </head>
@@ -50,11 +51,11 @@
 <script>
 
 // ============================================================
-//  ACRONYM ENGINE OF THE REPUBLIC
+//  ACRONYM ENGINE OF THE REPUBLIC (FINAL MAX EDITION)
 // ============================================================
 
-// ---------- SEED GENERATOR ----------------------------------
 
+// ---------- SEED LIST (multiple blocks) -------------
 
 const seedBlocks = [
 ["UTKARSH","PRAGATI","TEJAS","SAKSHAM","SAMPANN","GARIMA","LAKSHYA","PRERNA","NIRMAL","DHRUV","UJALA","TARANG"],
@@ -73,11 +74,10 @@ let seeds = [];
 seedBlocks.forEach(b => seeds.push(...b));
 
 
-// ----------  RANDOMNESS ) ------------
+// ---------- RANDOMIZER (No repeats) -------------
 
 function createDeck(list) {
   const deck = [...list];
-  // Fisher-Yates shuffle
   for (let i = deck.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [deck[i], deck[j]] = [deck[j], deck[i]];
@@ -93,31 +93,29 @@ function getSeed() {
 }
 
 
-// ---------- WORD BANKS: M ------------
+// ---------- WORD BANKS -------------
 
 const verbs = [
 "Transforming","Reimagining","Accelerating","Catalyzing","Empowering","Reforming","Reinvigorating",
 "Digitizing","Unifying","Optimizing","Mainstreaming","Strengthening","Enhancing","Revitalizing",
-"Integrating","Re-engineering","Spearheading","Scaling","Elevating","Enabling","Advancing",
-"Fostering","Mobilizing","Institutionalizing","Deepening","Reinventing","Recalibrating","Modernizing"
+"Integrating","Re-engineering","Spearheading","Scaling","Elevating","Enabling","Advancing"
 ];
 
 const concepts = [
 "Digital Governance","Agricultural Renewal","Urban Prosperity","Youth Development","Innovation Ecosystems",
-"National Productivity","Climate Resilience","Water Security","Energy Transition","Skill Advancement",
-"Public Service Delivery","Sustainable Futures","Scientific Progress","Trade Acceleration",
-"Data Empowerment","AI Enablement","Frontier Technologies","Space Research","Rural Inclusion",
-"Clean Manufacturing","Financial Inclusion","Public Health Systems","Civic Participation"
+"Climate Resilience","Water Security","Energy Transition","Skill Advancement","Public Service Delivery",
+"Sustainable Futures","Scientific Progress","Trade Acceleration","AI Enablement","Frontier Technologies"
 ];
 
 const goals = [
 "for a New India","Towards 2047","with People Participation","for Every Citizen","for Bharat’s Rise",
-"for Inclusive Prosperity","Inspired by the Constitution","Powered by Innovation",
-"Leading India Forward","Rooted in Tradition, Ready for Tomorrow","for Generational Renewal"
+"for Inclusive Prosperity","Inspired by the Constitution","Powered by Innovation","for Generational Renewal"
 ];
 
 
-// ---------- 50 TEMPLATES  ------------
+// -------------------------------------------------------------
+// ⭐ THE FIXED TEMPLATES — ACRONYM IS ALWAYS BOLD NOW
+// -------------------------------------------------------------
 
 const templates = [
 (seed,v,c,g,e)=>`<div class="acronym">${seed}</div>${v} ${c}<br><em>${g}</em><hr>${e}`,
@@ -129,9 +127,7 @@ const templates = [
 ];
 
 
-
-
-// ---------- LETTER EXPANSION ENGINE  ------------
+// ---------- LETTER EXPANSION ENGINE -------------
 
 const dict = {
 A:"Action",B:"Bharat",C:"Collaboration",D:"Development",E:"Empowerment",F:"Framework",
@@ -146,45 +142,9 @@ function expand(seed) {
 }
 
 
-// ---------- MODES ENGINE ------------
+// ---------- GENERATOR CORE -------------
 
-let currentMode = "default";
-
-function applyMode(seed, verb, concept) {
-  if (currentMode === "tech") {
-    concept = concept.replace("Governance","Digital Systems")
-                     .replace("Development","AI Acceleration");
-    verb = "Digitizing";
-  }
-
-  if (currentMode === "sanskrit") {
-    verb = "Sanskritizing";
-    concept = "Civilizational Renewal";
-  }
-
-  if (currentMode === "bureaucratic") {
-    verb = "Institutionalizing";
-    concept = "Integrated Multi-Modal Governance Frameworks";
-  }
-
-  if (currentMode === "poetic") {
-    concept = "Nationhood & Inner Illumination";
-  }
-
-  return [seed, verb, concept];
-}
-
-
-// ---------- BACKRONYM ENGINE (User Input) ------------
-
-function backronym(word) {
-  const seed = word.toUpperCase().replace(/[^A-Z]/g,"");
-  const expanded = seed.split("").map(l=>dict[l]||"—").join(" • ");
-  return `<div class="acronym">${seed}</div><hr>${expanded}`;
-}
-
-
-// ---------- MAIN GENERATOR ------------
+function pick(arr) { return arr[Math.floor(Math.random()*arr.length)]; }
 
 function generateOne() {
   let seed = getSeed();
@@ -192,47 +152,18 @@ function generateOne() {
   let concept = pick(concepts);
   let goal = pick(goals);
   const template = pick(templates);
-
-  [seed,verb,concept] = applyMode(seed,verb,concept);
-
   const exp = expand(seed);
   return template(seed,verb,concept,goal,exp);
 }
 
-function pick(arr) {
-  return arr[Math.floor(Math.random()*arr.length)];
-}
 
-
-// ---------- UI CONNECTORS ------------
+// ---------- UI ACTIONS -------------
 
 function generate() {
-  output.innerHTML = generateOne();
-}
-
-function generate10() {
-  output.innerHTML = Array.from({length:10}).map(generateOne).join("<br><br>");
-}
-
-function generate100() {
-  output.innerHTML = Array.from({length:100}).map(generateOne).join("<br><br>");
-}
-
-function setMode(m) {
-  currentMode = m;
-}
-
-
-// ---------- BACKRONYM UI ------------
-
-function makeBackronym() {
-  const word = document.getElementById("backronymInput").value;
-  output.innerHTML = backronym(word);
+  document.getElementById("output").innerHTML = generateOne();
 }
 
 </script>
-
-
 
 </body>
 </html>
