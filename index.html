@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Government Acronym Generator</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #faf7f1;
+      padding: 40px;
+      max-width: 700px;
+      margin: auto;
+      color: #333;
+    }
+    h1 { font-size: 2rem; margin-bottom: 0.2rem; }
+    .subtitle { opacity: 0.7; margin-bottom: 2rem; }
+    button {
+      padding: 12px 22px;
+      background: #ffb703;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+    button:hover { background: #e09a00; }
+    #output {
+      margin-top: 2rem;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      min-height: 80px;
+    }
+    .acronym {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #d00000;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Indian Government Acronym Generator</h1>
+<div class="subtitle">Crafted in the Department of Utterly Necessary Naming</div>
+
+<button onclick="generate()">Generate Acronym</button>
+
+<div id="output"></div>
+
+<script>
+  const seeds = ["UTKARSH", "PRAGATI", "TEJAS", "SAKSHAM", "SAMRIDHI", "NAVODAYA", "TARANG", "UDAYAM", "AVSAR"];
+  
+  const verbs = [
+    "Transforming", "Reimagining", "Catalyzing", "Accelerating",
+    "Empowering", "Harmonizing", "Enhancing"
+  ];
+  
+  const concepts = [
+    "Agriculture", "Digital Governance", "Youth Development",
+    "Urban Prosperity", "Innovation", "Holistic Growth",
+    "Infrastructure Modernization", "Sustainable Futures"
+  ];
+  
+  const goals = [
+    "for a New India", "Towards 2047", "for Every Citizen",
+    "for National Renewal", "for Bharat’s Rise",
+    "for Inclusive Progress"
+  ];
+
+  function pick(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
+  function expandAcronym(word) {
+    // Dumb but delightful expansion: every letter becomes a word
+    const dict = {
+      A: "Action", B: "Bharat", C: "Collaboration", D: "Development",
+      E: "Empowerment", F: "Framework", G: "Growth", H: "Harmony",
+      I: "Innovation", J: "Justice", K: "Knowledge", L: "Leadership",
+      M: "Mission", N: "Network", O: "Opportunities", P: "Programme",
+      Q: "Quality", R: "Reform", S: "Sustainability", T: "Transformation",
+      U: "Upliftment", V: "Vision", W: "Welfare", X: "Excellence",
+      Y: "Youth", Z: "Zenith"
+    };
+
+    return word.split("").map(letter => dict[letter] || "").join(" • ");
+  }
+
+  function generate() {
+    const seed = pick(seeds).toUpperCase();
+    const verb = pick(verbs);
+    const concept = pick(concepts);
+    const goal = pick(goals);
+
+    const expansion = expandAcronym(seed);
+
+    document.getElementById("output").innerHTML = `
+      <div class="acronym">${seed}</div>
+      <div>${verb} ${concept}</div>
+      <div style="margin-top:10px;"><em>${goal}</em></div>
+      <hr>
+      <strong>Full Form:</strong><br>${expansion}
+    `;
+  }
+</script>
+
+</body>
+</html>
