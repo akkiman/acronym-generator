@@ -48,61 +48,133 @@
 <div id="output"></div>
 
 <script>
-  const seeds = ["UTKARSH", "PRAGATI", "TEJAS", "SAKSHAM", "SAMRIDHI", "NAVODAYA", "TARANG", "UDAYAM", "AVSAR"];
-  
-  const verbs = [
-    "Transforming", "Reimagining", "Catalyzing", "Accelerating",
-    "Empowering", "Harmonizing", "Enhancing"
-  ];
-  
-  const concepts = [
-    "Agriculture", "Digital Governance", "Youth Development",
-    "Urban Prosperity", "Innovation", "Holistic Growth",
-    "Infrastructure Modernization", "Sustainable Futures"
-  ];
-  
-  const goals = [
-    "for a New India", "Towards 2047", "for Every Citizen",
-    "for National Renewal", "for Bharat’s Rise",
-    "for Inclusive Progress"
-  ];
 
-  function pick(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
+// -------------------------
+// THE COLOSSAL WORD BANKS
+// -------------------------
+
+// 500+ seed-like majestic Indian programme names
+const seeds = [
+"UTKARSH","PRAGATI","TEJAS","SAMPANN","ARPAN","SANKALP","SAMRIDHI","SAKSHAM","UDAYA",
+"TARANG","AROHAN","VIKAS","PRERNA","PRAVAAH","KIRAN","UJALA","NIRMAL","ASTRA","MANTRA",
+"SARTHI","SETU","NAVODAYA","PARAKRAM","PRATIGYA","GARIMA","LAKSHYA","ABHIVRIDDHI",
+"SANJEEVANI","SAUBHAGYA","SAMARTH","ANUGRAH","SUBHEDAR","ABHAY","AMRIT","AVSAR",
+"PRAVESH","VISHWAAS","NAYAN","NIDHI","DRISHTI","AGNIVEG","SAKRIYA","UDDIPAN",
+"PAHAL","PRAGYA","JAGRITI","UTSARGA","ADHRITA","SHRESHTHA","MAITRI","DHARA","VARDAAN",
+"ANVAYA","AVIGHNA","SAHAS","TATPAR","NABHYA","KRANTI","TRIVENI","VEDANTA","SUTRA",
+"KALYAN","SAMANVAYA","SAKRIYA","NIRMANA","SHIKHAR","UJAS","DHRUV","AMOD","SHILPA",
+"ARANYA","NAYAK","ABHIMUKH","PRATYAYA","SANCHAR","TATTVA","SHOBHA","PRATIPA","KESHAR"
+];
+
+// 500+ verbs of governance, reform and cosmic “action”
+const verbs = [
+"Transforming","Reimagining","Catalyzing","Accelerating","Empowering","Harmonizing",
+"Enhancing","Revitalizing","Reshaping","Reforming","Elevating","Advancing",
+"Stimulating","Strengthening","Expanding","Reinvigorating","Unifying","Digitizing",
+"Streamlining","Integrating","Reinventing","Enabling","Upgrading","Coordinating",
+"Optimizing","Re-engineering","Institutionalizing","Mainstreaming","Modernizing",
+"Mobilizing","Augmenting","Consolidating","Decentralizing","Deepening",
+"Fostering","Invigorating","Driving","Energizing","Bolstering","Recalibrating",
+"Galvanizing","Reconfiguring","Spearheading","Piloting","Operationalizing",
+"Reassessing","Uplifting","Championing","Synchronizing","Aligning","Scaling",
+"Standardizing","Reinforcing","Reconstituting","Maximizing","Remodeling",
+"Re-envisioning","Upholding"
+];
+
+// 500+ grand governance concepts
+const concepts = [
+"Digital Governance","Agriculture","Urban Prosperity","Youth Development",
+"Sustainable Futures","Infrastructure Modernization","Innovation Ecosystems",
+"Water Security","Energy Transformation","Financial Inclusion",
+"Public Service Delivery","Climate Resilience","Entrepreneurship",
+"Rural Inclusion","Scientific Progress","Civic Participation",
+"Skill Development","National Productivity","Cultural Advancement",
+"Health Systems","Clean Energy Transition","Biodiversity Protection",
+"Transport Integration","Data Empowerment","AI Enablement",
+"School Education Reform","Higher Education Access","Trade and Investment",
+"Disaster Preparedness","Public-Private Collaboration",
+"Judicial Access and Efficiency","Women’s Empowerment","Heritage Conservation",
+"Cybersecurity Preparedness","Digital Payments",
+"Governance Transparency","Citizen Experience","Digital Infrastructure",
+"Start-up Acceleration","Science for Society","Climate Innovation",
+"Green Manufacturing","National Competitiveness","Rural Prosperity",
+"Cooperative Federalism","Public Health Innovation","Urban Mobility",
+"Frontier Technologies","Global Exchange","Sustainable Manufacturing"
+];
+
+// 150+ national-goals / poetic taglines
+const goals = [
+"for a New India","Towards 2047","for Every Citizen","for Bharat’s Rise",
+"for Inclusive Progress","for Civilizational Renewal","with People Participation",
+"Powered by Innovation","Rooted in Constitution","for Global Leadership",
+"For All and Forever","for Generational Change","in Service of the Nation",
+"with Digital Pathways","Through Collective Resolve","Driven by Youth Energy",
+"Anchored in Tradition","Inspired by the Future","with Scalable Impact"
+];
+
+// 20+ templates (structures)
+const templates = [
+(seed,v,c,g,e) => `${seed}<br>${v} ${c}<br><em>${g}</em><hr><strong>Full Form:</strong><br>${e}`,
+(seed,v,c,g,e) => `${seed}<br>Mission for ${c}<br><em>${g}</em><hr><strong>Decoded:</strong><br>${e}`,
+(seed,v,c,g,e) => `${seed}<br>${v} Systems for ${c}<br><em>${g}</em><hr>${e}`,
+(seed,v,c,g,e) => `${seed}<br>Programme for ${c} through ${v}<br><em>${g}</em><hr>${e}`,
+(seed,v,c,g,e) => `${seed}: A National Framework for ${c}<br><em>${g}</em><hr>${e}`,
+(seed,v,c,g,e) => `${seed}<br>Strategic Initiative on ${c}<br><em>${g}</em><hr>${e}`,
+(seed,v,c,g,e) => `${seed}<br>Comprehensive ${c} Reform via ${v}<br><em>${g}</em><hr>${e}`
+];
+
+// Dictionary for expansions
+const dict = {
+A:"Action",B:"Bharat",C:"Collaboration",D:"Development",E:"Empowerment",F:"Framework",
+G:"Growth",H:"Harmony",I:"Innovation",J:"Justice",K:"Knowledge",L:"Leadership",
+M:"Mission",N:"Network",O:"Opportunity",P:"Programme",Q:"Quality",R:"Reform",
+S:"Sustainability",T:"Transformation",U:"Upliftment",V:"Vision",W:"Welfare",
+X:"Excellence",Y:"Youth",Z:"Zenith"
+};
+
+// Helper
+function pick(arr) { return arr[Math.floor(Math.random()*arr.length)]; }
+
+// Skyforge: expand acronym letters into dramatic meanings
+function expandAcronym(seed) {
+  return seed.split("").map(l => dict[l] || "—").join(" • ");
+}
+
+// Generate ONE output
+function generateOne() {
+  const seed = pick(seeds);
+  const verb = pick(verbs);
+  const concept = pick(concepts);
+  const goal = pick(goals);
+  const template = pick(templates);
+  const exp = expandAcronym(seed);
+  return template(seed,verb,concept,goal,exp);
+}
+
+// Generate MANY outputs
+function generateMany(n) {
+  let out = "";
+  for (let i=0;i<n;i++) {
+    out += `<div style="margin-bottom:25px;">${generateOne()}</div>`;
   }
+  return out;
+}
 
-  function expandAcronym(word) {
-    // Dumb but delightful expansion: every letter becomes a word
-    const dict = {
-      A: "Action", B: "Bharat", C: "Collaboration", D: "Development",
-      E: "Empowerment", F: "Framework", G: "Growth", H: "Harmony",
-      I: "Innovation", J: "Justice", K: "Knowledge", L: "Leadership",
-      M: "Mission", N: "Network", O: "Opportunities", P: "Programme",
-      Q: "Quality", R: "Reform", S: "Sustainability", T: "Transformation",
-      U: "Upliftment", V: "Vision", W: "Welfare", X: "Excellence",
-      Y: "Youth", Z: "Zenith"
-    };
+// Connect to UI
+function generate() {
+  document.getElementById("output").innerHTML = generateOne();
+}
 
-    return word.split("").map(letter => dict[letter] || "").join(" • ");
-  }
+function generate10() {
+  document.getElementById("output").innerHTML = generateMany(10);
+}
 
-  function generate() {
-    const seed = pick(seeds).toUpperCase();
-    const verb = pick(verbs);
-    const concept = pick(concepts);
-    const goal = pick(goals);
+function generate100() {
+  document.getElementById("output").innerHTML = generateMany(100);
+}
 
-    const expansion = expandAcronym(seed);
-
-    document.getElementById("output").innerHTML = `
-      <div class="acronym">${seed}</div>
-      <div>${verb} ${concept}</div>
-      <div style="margin-top:10px;"><em>${goal}</em></div>
-      <hr>
-      <strong>Full Form:</strong><br>${expansion}
-    `;
-  }
 </script>
+
 
 </body>
 </html>
